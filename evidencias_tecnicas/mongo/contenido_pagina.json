@@ -1,0 +1,29 @@
+[
+  {
+    "_id": "cp-0001", "id_pagina": 1, "slug": "inicio", "version": 3,
+    "bloques": [
+      {"tipo": "hero", "titulo": "Belleza y bienestar en Copiapó", "imagen": {"url": "https://cdn.rgbeauty.test/sitio/hero.jpg", "alt": "Sala de tratamientos"}, "boton": {"texto": "Reservar hora", "destino": {"modulo": "citas", "ruta": "/reservar"}}},
+      {"tipo": "productos_destacados", "titulo": "Lo más pedido", "ids_producto": [1, 2, 4], "origen": "ventas"},
+      {"tipo": "texto", "html": "<p>Tratamientos faciales y corporales con profesionales certificadas.</p>"}
+    ],
+    "seo": {"descripcion": "Centro de estética en Copiapó"},
+    "actualizado_por": 1, "actualizado_en": "2026-10-01T12:00:00Z"
+  },
+  {
+    "_id": "cp-0002", "id_pagina": 2, "slug": "servicios", "version": 2,
+    "bloques": [
+      {"tipo": "texto", "html": "<h2>Nuestros servicios</h2><p>Faciales, masajes y drenaje linfático.</p>"},
+      {"tipo": "lista_servicios", "origen": "citas", "ruta": "/servicios", "mostrar_precio": true},
+      {"tipo": "galeria", "imagenes": [{"url": "https://cdn.rgbeauty.test/sitio/serv-1.jpg", "alt": "Limpieza facial"}, {"url": "https://cdn.rgbeauty.test/sitio/serv-2.jpg", "alt": "Masaje descontracturante"}]}
+    ],
+    "actualizado_por": 2, "actualizado_en": "2026-10-03T09:30:00Z"
+  },
+  {
+    "_id": "cp-0003", "id_pagina": 3, "slug": "resultados", "version": 1,
+    "bloques": [
+      {"tipo": "texto", "html": "<p>Resultados reales de nuestras clientas.</p>"},
+      {"tipo": "antes_despues", "pares": [{"antes": "https://cdn.rgbeauty.test/sitio/r1a.jpg", "despues": "https://cdn.rgbeauty.test/sitio/r1d.jpg", "autorizacion_imagen": true}]}
+    ],
+    "actualizado_por": 2, "actualizado_en": "2026-10-15T16:00:00Z"
+  }
+]

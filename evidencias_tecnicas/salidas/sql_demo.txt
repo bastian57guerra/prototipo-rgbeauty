@@ -1,0 +1,70 @@
+EVIDENCIA 4.7.1 - Base estructurada | fecha de ejecucion: 29-10-2026 00:24
+Motor: SQLite 3.50.4 | Python 3.14.7
+==============================================================================
+[1] Creacion de esquema: OK
+    Tablas creadas (9): auditoria, modulo_externo, pagina, permiso, rol, rol_permiso, token_recuperacion, usuario, usuario_rol
+[2] Insercion de datos ficticios: OK
+    usuario: 3 filas
+    rol: 2 filas
+    permiso: 7 filas
+    rol_permiso: 10 filas
+    modulo_externo: 3 filas
+    pagina: 4 filas
+    auditoria: 4 filas
+
+[3] Consulta Q1. Usuarios con sus roles y cantidad de permisos
+id | usuario        | rol       | activo | permisos
+---+----------------+-----------+--------+---------
+1  | Carolina Reyes | DUENA     | 1      | 7       
+2  | Ana Munoz      | ASISTENTE | 1      | 3       
+3  | Sofia Lagos    | ASISTENTE | 0      | 3       
+(3 filas)
+
+[3] Consulta Q2. Permisos efectivos de la asistente (usuario 2)
+codigo           | descripcion                                                   
+-----------------+---------------------------------------------------------------
+CONTENIDO_EDITAR | Crear y editar paginas en borrador                            
+PRODUCTO_EDITAR  | Editar descripcion y fotos de productos (via modulo de ventas)
+AGENDA_VER       | Ver la agenda (consulta al modulo de citas)                   
+(3 filas)
+
+[3] Consulta Q3. Paginas con autor, publicador y estado
+slug                 | estado      | autor    | publicador | version
+---------------------+-------------+----------+------------+--------
+inicio               | PUBLICADA   | Carolina | Carolina   | 3      
+servicios            | PUBLICADA   | Ana      | Carolina   | 2      
+resultados           | BORRADOR    | Ana      | -          | 1      
+ofertas-de-primavera | EN_REVISION | Ana      | -          | 1      
+(4 filas)
+
+[3] Consulta Q4. Modulos conectados y su estado
+nombre     | contrato | timeout_ms | estado
+-----------+----------+------------+-------
+citas      | v1       | 3000       | ACTIVO
+ventas     | v1       | 3000       | ACTIVO
+inventario | v1       | 3000       | ACTIVO
+(3 filas)
+
+[4] Pruebas de integridad (cada intento debe ser RECHAZADO por el motor, salvo I10)
+    I1 Correo de usuario duplicado (UNIQUE)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: UNIQUE constraint failed: usuario.correo
+    I2 Asignar un rol inexistente (FK)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: FOREIGN KEY constraint failed
+    I3 Repetir permiso del mismo rol (PK compuesta)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: UNIQUE constraint failed: rol_permiso.id_rol, rol_permiso.id_permiso
+    I4 Pagina con slug repetido (UNIQUE)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: UNIQUE constraint failed: pagina.slug
+    I5 Pagina con estado inexistente (CHECK)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: CHECK constraint failed: estado IN ('BORRADOR','EN_REVISION','PUBLICADA')
+    I6 Pagina PUBLICADA sin publicador (CHECK)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: CHECK constraint failed: estado <> 'PUBLICADA' OR (id_publicador IS NOT NULL AND publicada_en IS NOT NULL)
+    I7 Modulo con timeout de 50.000 ms (CHECK)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: CHECK constraint failed: timeout_ms BETWEEN 100 AND 10000
+    I8 Token de recuperacion con hash repetido (UNIQUE)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: UNIQUE constraint failed: token_recuperacion.hash_token
+    I9 Intentos fallidos negativos (CHECK)
+        resultado: RECHAZADO (esperado: RECHAZADO) [OK] -> IntegrityError: CHECK constraint failed: intentos_fallidos >= 0
+    I10 Pagina BORRADOR valida (debe ser ACEPTADA)
+        resultado: ACEPTADO (esperado: ACEPTADO) [OK] 
+
+RESUMEN: todas las verificaciones de integridad se comportaron como se esperaba

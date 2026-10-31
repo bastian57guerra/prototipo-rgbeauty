@@ -1,0 +1,58 @@
+EVIDENCIA 4.9 - Ejecucion de pruebas | fecha: 25-10-2026 22:22
+Ambiente: Python 3.12.3 | SQLite 3.45.1 | Linux x86_64 | BD en memoria con datos ficticios
+====================================================================================================
+ID     Estado            ms  Descripcion
+PA01   FALLIDA          1.4  contraste de la paleta cumple WCAG AA cuando se usa segun la guia
+PI01   APROBADA         0.3  gateway consulta y normaliza la respuesta del modulo de citas
+PI02   APROBADA         0.8  modulo caido degrada solo esa parte del sitio
+PI03   APROBADA         0.2  circuit breaker abre no llama y se recupera
+PI04   APROBADA         0.1  reintenta errores transitorios pero no los de cliente
+PI05   APROBADA         0.1  respuesta que viola el contrato se rechaza y se registra
+PI06   APROBADA         0.1  checkout ignora precios del navegador y evita pedidos duplicados
+PI07   APROBADA         0.1  el modulo recibe la identidad firmada y rechaza tokens falsos
+PI08   APROBADA         2.9  acciones administrativas quedan auditadas incluso las rechazadas
+PR01   APROBADA     12298.9  gateway agrega tres modulos en paralelo con latencias simuladas
+PS01   APROBADA         1.7  inyeccion sql funciona con concatenacion y falla con consulta parametrizada
+PS02   APROBADA      1751.3  claves con hash salado y verificable
+PS03   APROBADA      3307.2  bloqueo tras 5 intentos y mensaje generico
+PS04   APROBADA         1.7  contenido editable no puede inyectar scripts
+PS05   APROBADA         1.5  asistente no escala privilegios ni ve borradores publicamente
+PS06   APROBADA       449.7  recuperacion de contrasena segura
+PU01   APROBADA         0.6  validaciones de rut telefono y correo
+PU02   APROBADA         0.0  politica de contrasenas
+PU03   APROBADA         1.6  sanitizacion de contenido y slug
+PU04   APROBADA         3.9  validacion de archivos subidos
+PU05   APROBADA         0.1  transiciones de estado de pagina
+PU06   APROBADA         0.1  token de servicio firmado con expiracion
+----------------------------------------------------------------------------------------------------
+Total: 22 | Aprobadas: 21 | Falladas: 1 | Errores: 0
+
+DETALLE FALLA tests.test_rendimiento_a11y.Accesibilidad.test_PA01_contraste_de_la_paleta_cumple_WCAG_AA_cuando_se_usa_segun_la_guia
+Traceback (most recent call last):
+  File "/home/claude/work/ev2/app/tests/test_rendimiento_a11y.py", line 29, in test_PA01_contraste_de_la_paleta_cumple_WCAG_AA_cuando_se_usa_segun_la_guia
+    self.assertEqual(rechazados, [], "pares que no cumplen: %s" % rechazados)
+AssertionError: Lists differ: ['Rosa AD6B78 como texto sobre blanco'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'Rosa AD6B78 como texto sobre blanco'
+
+- ['Rosa AD6B78 como texto sobre blanco']
++ [] : pares que no cumplen: ['Rosa AD6B78 como texto sobre blanco']
+
+
+Salida detallada de mediciones:
+
+    [PA-01] 11.37:1 (min 4.5) OK    Texto principal sobre blanco
+    [PA-01]  9.29:1 (min 4.5) OK    Texto principal sobre beige de fondo
+    [PA-01]  6.50:1 (min 4.5) OK    Texto de boton primario (blanco/vino)
+    [PA-01]  6.50:1 (min 4.5) OK    Enlaces y titulos vino sobre blanco
+    [PA-01]  5.30:1 (min 4.5) OK    Vino sobre beige
+    [PA-01]  4.08:1 (min 3.0) OK    Rosa AD6B78 como borde de campo (UI)
+    [PA-01]  7.77:1 (min 4.5) OK    Mensaje de exito (verde oscuro/verde claro)
+    [PA-01]  6.90:1 (min 4.5) OK    Mensaje de error (rojo/rosa palido)
+    [PA-01]  7.82:1 (min 4.5) OK    Mensaje de aviso (ocre/crema)
+    [PA-01]  4.08:1 (min 4.5) FALLA Rosa AD6B78 como texto sobre blanco
+    [PA-01]  7.00:1 (min 4.5) OK    Texto secundario gris sobre blanco
+    [PA-01]  4.55:1 (min 4.5) OK    Horario ocupado (gris/gris claro)
+    [PR-01] paralelo (60 cargas de pagina): p50=121 ms p95=122 ms max=122 ms | secuencial (20): p50=251 ms | latencias simuladas 50/80/120 ms (umbral p95 <= 500 ms)

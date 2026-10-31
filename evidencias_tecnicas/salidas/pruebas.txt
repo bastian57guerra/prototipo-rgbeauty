@@ -1,0 +1,44 @@
+EVIDENCIA 4.9 - Ejecucion de pruebas | fecha: 29-10-2026 00:24
+Ambiente: Python 3.14.7 | SQLite 3.50.4 | Windows AMD64 | BD en memoria con datos ficticios
+====================================================================================================
+ID     Estado            ms  Descripcion
+PA01   APROBADA         0.6  contraste de la paleta cumple WCAG AA cuando se usa segun la guia
+PI01   APROBADA         2.5  gateway consulta y normaliza la respuesta del modulo de citas
+PI02   APROBADA         1.5  modulo caido degrada solo esa parte del sitio
+PI03   APROBADA         0.2  circuit breaker abre no llama y se recupera
+PI04   APROBADA         0.1  reintenta errores transitorios pero no los de cliente
+PI05   APROBADA         0.1  respuesta que viola el contrato se rechaza y se registra
+PI06   APROBADA         0.1  checkout ignora precios del navegador y evita pedidos duplicados
+PI07   APROBADA         0.1  el modulo recibe la identidad firmada y rechaza tokens falsos
+PI08   APROBADA         1.8  acciones administrativas quedan auditadas incluso las rechazadas
+PR01   APROBADA     13576.4  gateway agrega tres modulos en paralelo con latencias simuladas
+PS01   APROBADA         1.4  inyeccion sql funciona con concatenacion y falla con consulta parametrizada
+PS02   APROBADA      1085.4  claves con hash salado y verificable
+PS03   APROBADA      1884.2  bloqueo tras 5 intentos y mensaje generico
+PS04   APROBADA         2.3  contenido editable no puede inyectar scripts
+PS05   APROBADA         1.3  asistente no escala privilegios ni ve borradores publicamente
+PS06   APROBADA       270.5  recuperacion de contrasena segura
+PU01   APROBADA         1.0  validaciones de rut telefono y correo
+PU02   APROBADA         0.0  politica de contrasenas
+PU03   APROBADA         4.8  sanitizacion de contenido y slug
+PU04   APROBADA         0.8  validacion de archivos subidos
+PU05   APROBADA         0.0  transiciones de estado de pagina
+PU06   APROBADA         0.6  token de servicio firmado con expiracion
+----------------------------------------------------------------------------------------------------
+Total: 22 | Aprobadas: 22 | Falladas: 0 | Errores: 0
+
+Salida detallada de mediciones:
+
+    [PA-01] 11.37:1 (min 4.5) OK    Texto principal sobre blanco
+    [PA-01]  9.29:1 (min 4.5) OK    Texto principal sobre beige de fondo
+    [PA-01]  6.50:1 (min 4.5) OK    Texto de boton primario (blanco/vino)
+    [PA-01]  6.50:1 (min 4.5) OK    Enlaces y titulos vino sobre blanco
+    [PA-01]  5.30:1 (min 4.5) OK    Vino sobre beige
+    [PA-01]  4.08:1 (min 3.0) OK    Rosa AD6B78 como borde de campo (UI)
+    [PA-01]  7.77:1 (min 4.5) OK    Mensaje de exito (verde oscuro/verde claro)
+    [PA-01]  6.90:1 (min 4.5) OK    Mensaje de error (rojo/rosa palido)
+    [PA-01]  7.82:1 (min 4.5) OK    Mensaje de aviso (ocre/crema)
+    [PA-01]  7.00:1 (min 4.5) OK    Texto secundario gris sobre blanco
+    [PA-01]  4.55:1 (min 4.5) OK    Horario ocupado (gris/gris claro)
+    [PA-01]  4.08:1 (min 4.5) USO PROHIBIDO EN LA GUIA -> Rosa AD6B78 como texto sobre blanco
+    [PR-01] paralelo (60 cargas de pagina): p50=122 ms p95=302 ms max=347 ms | secuencial (20): p50=251 ms | latencias simuladas 50/80/120 ms (umbral p95 <= 500 ms)

@@ -1,0 +1,24 @@
+EVIDENCIA 4.7.1 - Documentos no estructurados | fecha: 29-10-2026 00:24
+Colecciones: contenido_pagina (3 documentos), eventos_integracion (3 documentos)
+NOTA: verificacion local en Python; la insercion/consulta en MongoDB se evidencia con mongosh (consultas_mongosh.js).
+==============================================================================
+C1 find({'bloques.boton.destino.modulo':'citas'}):
+   cp-0001 | inicio | version 3
+C2 find({resultado:{$ne:'OK'}}) ordenado por inicio desc:
+   ev-0003 | inventario | CONTRATO_INVALIDO | 120 ms
+   ev-0002 | citas | TIMEOUT | 3000 ms
+C3 aggregate por modulo y resultado:
+   ventas / OK: 1
+   citas / TIMEOUT: 1
+   inventario / CONTRATO_INVALIDO: 1
+Integridad referencial entre almacenes (documental -> relacional):
+   cp-0001: pagina 1 (inicio) OK
+      actualizado_por 1 OK
+   cp-0002: pagina 2 (servicios) OK
+      actualizado_por 2 OK
+   cp-0003: pagina 3 (resultados) OK
+      actualizado_por 2 OK
+   ev-0001: modulo ventas OK
+   ev-0002: modulo citas OK
+   ev-0003: modulo inventario OK
+RESUMEN: referencias coherentes con el modelo relacional

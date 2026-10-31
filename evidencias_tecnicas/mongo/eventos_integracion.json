@@ -1,0 +1,5 @@
+[
+  {"_id": "ev-0001", "id_solicitud": "req-7f3a1", "modulo": "ventas", "ruta": "/productos", "metodo": "GET", "inicio": "2026-10-23T14:05:01Z", "duracion_ms": 85, "estado_http": 200, "resultado": "OK", "detalle": {"items_recibidos": 12, "version_contrato": "v1"}},
+  {"_id": "ev-0002", "id_solicitud": "req-7f3a2", "modulo": "citas", "ruta": "/disponibilidad", "metodo": "GET", "inicio": "2026-10-23T14:05:02Z", "duracion_ms": 3000, "estado_http": null, "resultado": "TIMEOUT", "detalle": {"intentos": 2, "circuito": "ABIERTO", "mensaje_usuario": "Reservar hora no está disponible por ahora"}},
+  {"_id": "ev-0003", "id_solicitud": "req-7f3a3", "modulo": "inventario", "ruta": "/stock", "metodo": "GET", "inicio": "2026-10-23T14:06:10Z", "duracion_ms": 120, "estado_http": 200, "resultado": "CONTRATO_INVALIDO", "detalle": {"error": "$.stock[0].disponible: campo faltante", "accion": "respuesta descartada y evento registrado"}}
+]
